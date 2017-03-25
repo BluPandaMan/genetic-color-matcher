@@ -12,13 +12,14 @@ class Population {
   Population(int popMax) {
     population = new DNA[popMax];
     for(int i = 0; i < popMax; i++) {
-      population[i] = new DNA(28); 
+      population[i] = new DNA(6); 
     }
   }
   
   void calcHex() {
     for(int i = 0; i < population.length; i++) {
-      population[i].toHex(); 
+      population[i].hexToString(); 
+      System.out.println(population[i].getHex());
     }
   }
   
@@ -32,7 +33,7 @@ class Population {
     int xPos = 0;
     int yPos = 0;
     for(int i = 0; i < population.length; i++) {
-      fill(population[i].getR(), 
+      fill(population[i].getR(),
            population[i].getG(),
            population[i].getB()); 
       rect(xPos, yPos, 100, 80);
@@ -41,8 +42,6 @@ class Population {
         xPos = 0;
         yPos += 80;
       } 
-      System.out.println(xPos);
-      System.out.println(yPos);
     }
   }
   

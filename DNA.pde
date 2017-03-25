@@ -17,7 +17,7 @@ import java.util.Arrays;
 class DNA {
   
   // MEMBER VAIRABLES //
-  int[] genes;
+  char[] genes;
   int r;
   int g;
   int b;
@@ -26,23 +26,72 @@ class DNA {
   
   // CONSTRUCTORS //
   DNA(int num) {
-    genes = new int[num];
+    genes = new char[num];
     for(int i = 0; i < num; i++) {
-      genes[i] = int(random(2)); 
+      float r = random(1);
+      if(r >= 0.375) {
+        genes[i] = (char) random(48, 58);
+      } else {
+        genes[i] = (char) random(65, 71);
+      }
     }
   }
   
   // METHODS //
-  void toHex() {
-    String g = Arrays.toString(genes).replaceAll("\\[|\\]|,|\\s", "");
-    int dec = Integer.parseInt(g, 2);
-    hex = Integer.toHexString(dec);
+  void toBinary() {
+    
+  }
+  
+  String hexToString() {
+    hex = "";
+    for(int i = 0; i < genes.length; i++) {
+       hex += genes[i];
+    }
+    return hex; 
   }
   
   void toRGB(String hex) {
-    r = Integer.valueOf(hex.substring(1, 3), 16);
-    g = Integer.valueOf(hex.substring(3, 5), 16);
-    b = Integer.valueOf(hex.substring(5, 6), 16); 
+    int[] ret = new int[3];
+    for(int i = 0; i < 3; i++) {
+      String a = hex.substring(i*2, i*2+1); 
+      String b = hex.substring(i*2+1, i*2+2);
+      int x = 0;
+      int y = 0;
+      switch(a) {
+        case "A": x = 10;
+          break;
+        case "B": x = 11;
+          break;
+        case "C": x = 12;
+          break;
+        case "D": x = 13;
+          break;
+        case "E": x = 14;
+          break;
+        case "F": x = 15;
+          break;
+        default: x = Integer.parseInt(a);
+      }
+      switch(b) {
+        case "A": y = 10;
+          break;
+        case "B": y = 11;
+          break;
+        case "C": y = 12;
+          break;
+        case "D": y = 13;
+          break;
+        case "E": y = 14;
+          break;
+        case "F": y = 15;
+          break;
+        default: y = Integer.parseInt(b);
+      }
+      ret[i] = x * 16 + y;
+    }
+    r = ret[0];
+    g = ret[1];
+    b = ret[2];
   }
   
   String getHex() {

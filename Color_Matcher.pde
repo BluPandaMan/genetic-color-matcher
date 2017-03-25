@@ -30,7 +30,7 @@ import java.awt.Graphics;
 final int WIDTH = 1000, HEIGHT = 800;
 
 Population population;
-int popMax = 20;
+int popMax = 100;
 
 void setup() {
   size(1000, 800);
