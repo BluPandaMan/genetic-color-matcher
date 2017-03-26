@@ -38,9 +38,6 @@ class DNA {
   }
   
   // METHODS //
-  void toBinary() {
-    
-  }
   
   String hexToString() {
     hex = "";
@@ -92,6 +89,48 @@ class DNA {
     r = ret[0];
     g = ret[1];
     b = ret[2];
+  }
+  
+  void fitness(String target) {
+    int score = 0;
+    String binary = Integer.toBinaryString(Integer.parseInt(hex, 16));
+    String targetBinary = Integer.toBinaryString(Integer.parseInt(target, 16));
+    for(int i = binary.length(); i < 24; i++) {
+      binary = "0" + binary; 
+    }
+    for(int i = targetBinary.length(); i < 24; i++) {
+      targetBinary = "0" + targetBinary; 
+    }
+    for(int i = 0; i < binary.length(); i++) {
+      if(binary.charAt(i) == targetBinary.charAt(i)) 
+        score++;
+    }
+    fitness = (float) score / (float) targetBinary.length();
+  }
+  
+  DNA crossover(DNA parent) {
+    DNA child = new DNA(genes.length);
+    
+    int midPoint = int(random(genes.length));
+    
+    for(int i = 0; i < genes.length; i++) {
+      if(i < midPoint) child.genes[i] = genes[i];
+      else child.genes[i] = parent.genes[i];
+    }
+    return child;
+  }
+  
+  void mutate(float mutationRate) {
+    for(int i = 0; i < genes.length; i++) {
+      if(random(1) <= mutationRate) {
+        float r = random(1);
+        if(r >= 0.375) {
+          genes[i] = (char) random(48, 58);
+        } else {
+          genes[i] = (char) random(65, 71);
+        } 
+      }
+    }
   }
   
   String getHex() {

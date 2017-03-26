@@ -27,19 +27,31 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
-final int WIDTH = 1000, HEIGHT = 800;
-
 Population population;
-int popMax = 100;
+int popMax = 400;
+float mutationRate = 0.0;
 
 void setup() {
   size(1000, 800);
-  population = new Population(popMax);
+  population = new Population(popMax, mutationRate);
 }
 
 void draw() {
+  // populates the hex string for each DNA with a hex value
   population.calcHex();
+  
+  // concerts all the populations hex into r, g, and b values
   population.calcRGB();
   
+  // population.sort();
+  
+  // displays the grid of colors or members
   population.displayDNA();
+  
+  // calculates the fitness of every member
+  population.calcFitness();
+  
+  population.naturalSelection();
+  
+  population.generate();
 }
