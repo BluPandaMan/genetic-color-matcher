@@ -24,15 +24,14 @@
       - replace the population with the new children
 */
 
-import java.awt.Color;
-import java.awt.Graphics;
-
 Population population;
 int popMax = 400;
-float mutationRate = 0.0;
+float mutationRate = 0.0001;
 
 void setup() {
-  size(1000, 800);
+  size(1000, 800);    // sets up a new canvas that size
+  
+  // creates the new initial population
   population = new Population(popMax, mutationRate);
 }
 
@@ -43,15 +42,19 @@ void draw() {
   // concerts all the populations hex into r, g, and b values
   population.calcRGB();
   
-  // population.sort();
-  
   // displays the grid of colors or members
   population.displayDNA();
   
   // calculates the fitness of every member
   population.calcFitness();
   
+  // gets the average fitness of the population and changes the target
+  // DNA if the avg fitness is greater than 99.999%
+  population.getAverageFitness();
+  
+  // adds all DNA to the mating pool based on fitness
   population.naturalSelection();
   
+  // splits parents and replaces population with new children
   population.generate();
 }
