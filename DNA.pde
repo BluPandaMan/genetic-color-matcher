@@ -13,7 +13,7 @@
     # creates a new DNA genome (154)
 */
 
-class DNA {
+class DNA implements Comparable<DNA> {
   
   // MEMBER VAIRABLES //
   
@@ -21,7 +21,7 @@ class DNA {
   int r;
   int g;
   int b;
-  float fitness;
+  public float fitness;
   String hex;
   
   // CONSTRUCTORS //
@@ -158,14 +158,19 @@ class DNA {
     }
   }
   
+  public int compareTo(DNA compareDNA) {
+     int compareFit = ((DNA) compareDNA).getFitness();
+     return this.getFitness() - compareFit;
+  }
+  
   // GETTERS & SETTERS //
   
   String getHex() {
     return hex; 
   }
   
-  float getFitness() {
-    return fitness; 
+  int getFitness() {
+    return (int) (fitness * 100); 
   }
 
   int getR() {

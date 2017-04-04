@@ -5,18 +5,21 @@
   This class holds our DNA members into our population
   
   Functions:
-    # gets hex and rgb values (35, 42)
-    # displays shapes and colors on a grid (49)
-    # calculates fitness on every pop member(66)
-    # puts parents in the mating pool (73)
-    # creates a new generation of colors (96)
-    # checks the avg fitness (109)
+    # gets hex and rgb values (36, 43)
+    # displays shapes and colors on a grid (50)
+    # calculates fitness on every pop member(67)
+    # puts parents in the mating pool (74)
+    # creates a new generation of colors (99)
+    # checks the avg fitness (112)
 */
+
+import java.util.Collections;
 
 class Population {
    
   DNA[] population;                   // new pop of colors
   ArrayList<DNA> matingPool;          // pool to select from for mating
+  ArrayList<DNA> sortingPop;
   float mutationRate;                 // chance to mutate a gene
   int popMax;                         // total population
   
@@ -27,8 +30,8 @@ class Population {
     for(int i = 0; i < popMax; i++) {
       population[i] = new DNA(6); 
     }
-    
     matingPool = new ArrayList<DNA>();
+    sortingPop = new ArrayList<DNA>();
   }
   
   // adds value for each DNA's hex value;
@@ -47,17 +50,19 @@ class Population {
   
   // displays the color rectangles in a grid
   void displayDNA() {
+    int xSize = displayWidth/48;
+    int ySize = displayHeight/27;
     int xPos = 0;
     int yPos = 0;
     for(int i = 0; i < population.length; i++) {
       fill(population[i].getR(),    // gets the color for the rect
            population[i].getG(),
            population[i].getB()); 
-      rect(xPos, yPos, 50, 40);     // creates the rect using an xPos
-      xPos += 50;                   // every rect moves over by 50
-      if(xPos >= 1000) {            // until it reaches the end of the canvas
+      rect(xPos, yPos, xSize, ySize);     // creates the rect using an xPos
+      xPos += xSize;                   // every rect moves over by 50
+      if(xPos >= displayWidth) {            // until it reaches the end of the canvas
         xPos = 0;                   // then x goes back to 0
-        yPos += 40;                 // and y moves down 40 (starting a new row)
+        yPos += ySize;                 // and y moves down 40 (starting a new row)
       } 
     }
   }
@@ -111,9 +116,19 @@ class Population {
     for(int i = 0; i < population.length; i++) {
       total += population[i].fitness; 
     }
-    
     // if the avg fitness is over 99.999% then the first pop member (the target) changes
-    if(total / (population.length) >= 0.99999) population[0].newDNA();
+    if(total / (population.length) >= 0.997) population[0].newDNA();
+  }
+  
+  void sort() {
+    sortingPop.clear();
+    for(int i = 1; i < population.length; i++) {
+       sortingPop.add(population[i]);
+    }
+    Collections.sort(sortingPop);
+    for(int i = 0; i < population.length-1; i++) {
+      population[i+1] = sortingPop.get(i); 
+    }
   }
   
 }
