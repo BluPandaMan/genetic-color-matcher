@@ -5,12 +5,13 @@
   This class holds our DNA members into our population
   
   Functions:
-    # gets hex and rgb values (36, 43)
-    # displays shapes and colors on a grid (50)
-    # calculates fitness on every pop member(67)
-    # puts parents in the mating pool (74)
-    # creates a new generation of colors (99)
-    # checks the avg fitness (112)
+    # gets hex and rgb values (37, 44)
+    # displays shapes and colors on a grid (51)
+    # calculates fitness on every pop member(68)
+    # puts parents in the mating pool (75)
+    # creates a new generation of colors (98)
+    # checks the avg fitness (111)
+    # sorts the population top to bottom (124)
 */
 
 import java.util.Collections;

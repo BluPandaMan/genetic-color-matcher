@@ -11,6 +11,7 @@
     # combine parents to make a child (127)
     # mutate the child on a % (140)
     # creates a new DNA genome (154)
+    # compares each DNA by their fitness (161)
 */
 
 class DNA implements Comparable<DNA> {
