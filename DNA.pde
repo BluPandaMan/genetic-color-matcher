@@ -2,16 +2,17 @@
   Color Matcher
   Tre Turner <tre.turner34@gmail.com>
   
-  The class that creates the variation in each gene
+  The class that variates each gene and creates the DNA 
+  for each population member.
   
   Functions: 
-    # convert genes[] to hex (46)
-    # calculate rgb values (55)
-    # calculate fitness (103)
-    # combine parents to make a child (127)
-    # mutate the child on a % (140)
-    # creates a new DNA genome (154)
-    # compares each DNA by their fitness (161)
+    # convert genes[] to hex (48)
+    # calculate the rgb values (57)
+    # calculates the fitness (105)
+    # combine parents to make a child (129)
+    # mutate the child on a % (142)
+    # creates a new DNA genome (156)
+    # compares each DNA by their fitness (163)
 */
 
 class DNA implements Comparable<DNA> {

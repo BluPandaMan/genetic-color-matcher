@@ -2,16 +2,16 @@
   Color Matcher, Genetic Algorith
   Tre Turner <tre.turner34@gmail.com>
   
-  This class holds our DNA members into our population
+  This class creates the population holding our DNA objects
   
   Functions:
-    # gets hex and rgb values (37, 44)
-    # displays shapes and colors on a grid (51)
-    # calculates fitness on every pop member(68)
-    # puts parents in the mating pool (75)
-    # creates a new generation of colors (98)
-    # checks the avg fitness (111)
-    # sorts the population top to bottom (124)
+    # gets hex and rgb values (41, 48)
+    # displays shapes and colors on a grid (55)
+    # calculates fitness on every pop member(74)
+    # puts parents in the mating pool (81)
+    # creates a new generation of colors (104)
+    # checks the avg fitness (117)
+    # sorts the population top to bottom (126)
 */
 
 import java.util.Collections;
@@ -23,10 +23,12 @@ class Population {
   ArrayList<DNA> sortingPop;
   float mutationRate;                 // chance to mutate a gene
   int popMax;                         // total population
+  float avgPercentNeeded;
   
-  Population(int p, float m) {
+  Population(int p, float m, float apn) {
     mutationRate = m;
     popMax = p;
+    avgPercentNeeded = apn;
     population = new DNA[popMax];
     for(int i = 0; i < popMax; i++) {
       population[i] = new DNA(6); 
@@ -118,7 +120,7 @@ class Population {
       total += population[i].fitness; 
     }
     // if the avg fitness is over 99.999% then the first pop member (the target) changes
-    if(total / (population.length) >= 0.997) population[0].newDNA();
+    if(total / (population.length) >= avgPercentNeeded) population[0].newDNA();
   }
   
   void sort() {

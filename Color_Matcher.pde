@@ -1,7 +1,7 @@
 /*
   Color Matcher, Genetic Algorithm
   Tre Turner <tre.turner34@gmail.com>
-  23Mar.17
+  04/06/2017
   
   # A program to match up to a color
   
@@ -27,12 +27,16 @@
 Population population;
 int popMax = 1400;
 float mutationRate = 0.0001;
+float avgPercentNeeded = 0.9965;
+
+boolean sort = true;    // Set to 'true' if you want the colors to be sorted before displayed (makes a color rainbow effect) 
+                         // Set to 'false' if you want the standard random display
 
 void setup() {
-  fullScreen();    // sets up a new canvas that size
+  fullScreen();    // sets up a new canvas the size of your screen
   
   // creates the new initial population
-  population = new Population(popMax, mutationRate);
+  population = new Population(popMax, mutationRate, avgPercentNeeded);
 }
 
 void draw() {
@@ -45,8 +49,9 @@ void draw() {
   // calculates the fitness of every member
   population.calcFitness();
   
-  // Sorts the colors bottom to top, right to left in terms of fitness
-  // population.sort();
+  if(sort == true) 
+    // Sorts the colors bottom to top, right to left in terms of fitness
+    population.sort();
   
   population.calcFitness();
   
